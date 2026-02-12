@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Will You Be My Valentine? 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-bg" id="heartsBg"></div>
+
+    <!-- Rose Petals -->
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <!-- ===== SECTION 1: INTRO / LANDING ===== -->
+    <section class="section intro-section" id="introSection">
+        <div class="envelope-wrapper" id="envelopeWrapper">
+            <div class="envelope" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body">
+                    <div class="letter">
+                        <p class="letter-text">I have something to ask you...</p>
+                    </div>
+                </div>
+            </div>
+            <p class="tap-hint">💌 Click the envelope 💌</p>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 2: PHOTO GALLERY ===== -->
+    <section class="section gallery-section hidden" id="gallerySection">
+        <h2 class="section-title script-font">Our Beautiful Moments</h2>
+        <p class="section-subtitle">Every moment with you is a treasure 💖</p>
+
+        <div class="gallery-carousel">
+            <button class="carousel-btn prev-btn" id="prevBtn">&#10094;</button>
+            <div class="carousel-track-container">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Images will be loaded here -->
+                    <div class="carousel-slide">
+                        <img src="images/photo1.jpeg" alt="Our moment 1">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/photo2.jpeg" alt="Our moment 2">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/photo3.jpeg" alt="Our moment 3">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/photo4.jpeg" alt="Our moment 4">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/photo5.jpeg" alt="Our moment 5">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/photo6.jpeg" alt="Our moment 6">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/photo7.jpeg" alt="Our moment 7">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/photo8.jpeg" alt="Our moment 8">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/photo9.jpeg" alt="Our moment 9">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="images/photo10.jpeg" alt="Our moment 10">
+                        <div class="slide-caption">💕</div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn next-btn" id="nextBtn">&#10095;</button>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots"></div>
+
+        <button class="continue-btn pulse-btn" id="continueToQuestion">
+            Continue to the big question 💝
+        </button>
+    </section>
+
+    <!-- ===== SECTION 3: THE BIG QUESTION ===== -->
+    <section class="section question-section hidden" id="questionSection">
+        <div class="question-container">
+            <div class="heart-icon-big">❤️</div>
+            <h1 class="question-title script-font">Will You Be My Valentine at Feb 14?</h1>
+            <p class="question-subtitle">You make my heart skip a beat every single day 💓</p>
+
+            <div class="buttons-container" id="buttonsContainer">
+                <button class="btn btn-yes" id="yesBtn">
+                    Yes! 💖
+                </button>
+                <button class="btn btn-no" id="noBtn">
+                    No 💔
+                </button>
+            </div>
+
+            <p class="dodge-message hidden" id="dodgeMessage">Hehe, you can't say no! 😏💕</p>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 4: CELEBRATION (after Yes) ===== -->
+    <section class="section celebration-section hidden" id="celebrationSection">
+        <div class="celebration-content">
+            <div class="fireworks" id="fireworks"></div>
+            <h1 class="celebration-title script-font">Yay! 🎉💕</h1>
+            <h2 class="celebration-subtitle">I knew you'd say yes!</h2>
+            <div class="celebration-heart">💖</div>
+            <p class="celebration-message">
+                You just made me the happiest person in the world!<br>
+                Happy Valentine's Day, my love! 🌹✨
+            </p>
+            <div class="celebration-photos" id="celebrationPhotos">
+                <!-- A montage of photos will appear here -->
+            </div>
+        </div>
+        <canvas id="confettiCanvas"></canvas>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
