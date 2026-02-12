@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             introSection.classList.add('hidden');
             gallerySection.classList.remove('hidden');
             gallerySection.scrollIntoView({ behavior: 'smooth' });
-            initCarousel();
+            initFloatingPhotos();
         }, 1500);
     });
 
@@ -180,67 +180,153 @@ function createBurstHearts(x, y) {
     }
 }
 
-// ===== CAROUSEL =====
-function initCarousel() {
-    const track = document.getElementById('carouselTrack');
-    const slides = track.querySelectorAll('.carousel-slide');
-    const dotsContainer = document.getElementById('carouselDots');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    let currentIndex = 0;
-    let autoPlayTimer;
+// ===== FLOATING BOUNCING PHOTOS =====
+let floatingAnimationId = null;
 
-    // Create dots
-    slides.forEach((_, i) => {
-        const dot = document.createElement('div');
-        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-        dot.addEventListener('click', () => goToSlide(i));
-        dotsContainer.appendChild(dot);
-    });
+function initFloatingPhotos() {
+    const container = document.getElementById('floatingPhotos');
+    const bubbles = container.querySelectorAll('.photo-bubble');
+    const rect = container.getBoundingClientRect();
+    const containerW = container.offsetWidth;
+    const containerH = container.offsetHeight;
 
-    function goToSlide(index) {
-        currentIndex = index;
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    const physics = [];
 
-        // Update dots
-        document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentIndex);
+    bubbles.forEach((bubble, i) => {
+        const size = bubble.offsetWidth;
+        // Spread initial positions so they don't all stack
+        const cols = 5;
+        const rows = 2;
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const spacingX = (containerW - size) / cols;
+        const spacingY = (containerH - size) / rows;
+
+        const x = col * spacingX + Math.random() * 30;
+        const y = row * spacingY + Math.random() * 30;
+
+        // Random velocity — different speeds and directions
+        const speed = 0.6 + Math.random() * 0.8;
+        const angle = Math.random() * Math.PI * 2;
+
+        physics.push({
+            el: bubble,
+            x: Math.max(0, Math.min(x, containerW - size)),
+            y: Math.max(0, Math.min(y, containerH - size)),
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            size: size
         });
 
-        resetAutoPlay();
-    }
+        bubble.style.position = 'absolute';
+        bubble.style.left = physics[i].x + 'px';
+        bubble.style.top = physics[i].y + 'px';
 
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        goToSlide(currentIndex);
-    }
-
-    function prevSlide() {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        goToSlide(currentIndex);
-    }
-
-    nextBtn.addEventListener('click', nextSlide);
-    prevBtn.addEventListener('click', prevSlide);
-
-    // Auto-play
-    function resetAutoPlay() {
-        clearInterval(autoPlayTimer);
-        autoPlayTimer = setInterval(nextSlide, 4000);
-    }
-    resetAutoPlay();
-
-    // Swipe support for mobile
-    let touchStartX = 0;
-    track.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
+        // Click to enlarge
+        bubble.addEventListener('click', () => {
+            const img = bubble.querySelector('img');
+            openPhotoViewer(img.src);
+        });
     });
-    track.addEventListener('touchend', (e) => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-            diff > 0 ? nextSlide() : prevSlide();
-        }
-    });
+
+    // Physics animation loop — bouncing off walls and each other
+    function animate() {
+        const w = container.offsetWidth;
+        const h = container.offsetHeight;
+
+        physics.forEach((p, i) => {
+            // Move
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // Bounce off walls
+            if (p.x <= 0) { p.x = 0; p.vx = Math.abs(p.vx); }
+            if (p.x + p.size >= w) { p.x = w - p.size; p.vx = -Math.abs(p.vx); }
+            if (p.y <= 0) { p.y = 0; p.vy = Math.abs(p.vy); }
+            if (p.y + p.size >= h) { p.y = h - p.size; p.vy = -Math.abs(p.vy); }
+
+            // Bounce off other bubbles
+            for (let j = i + 1; j < physics.length; j++) {
+                const q = physics[j];
+                const dx = (p.x + p.size / 2) - (q.x + q.size / 2);
+                const dy = (p.y + p.size / 2) - (q.y + q.size / 2);
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const minDist = (p.size + q.size) / 2;
+
+                if (dist < minDist && dist > 0) {
+                    // Push apart
+                    const nx = dx / dist;
+                    const ny = dy / dist;
+                    const overlap = minDist - dist;
+
+                    p.x += nx * overlap * 0.5;
+                    p.y += ny * overlap * 0.5;
+                    q.x -= nx * overlap * 0.5;
+                    q.y -= ny * overlap * 0.5;
+
+                    // Swap velocities along collision axis
+                    const dvx = p.vx - q.vx;
+                    const dvy = p.vy - q.vy;
+                    const dot = dvx * nx + dvy * ny;
+
+                    p.vx -= dot * nx * 0.8;
+                    p.vy -= dot * ny * 0.8;
+                    q.vx += dot * nx * 0.8;
+                    q.vy += dot * ny * 0.8;
+                }
+            }
+
+            // Apply slight random drift to keep things lively
+            p.vx += (Math.random() - 0.5) * 0.02;
+            p.vy += (Math.random() - 0.5) * 0.02;
+
+            // Speed limit
+            const maxSpeed = 1.8;
+            const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+            if (speed > maxSpeed) {
+                p.vx = (p.vx / speed) * maxSpeed;
+                p.vy = (p.vy / speed) * maxSpeed;
+            }
+
+            // Keep minimum speed so they never stop
+            const minSpeed = 0.3;
+            if (speed < minSpeed) {
+                p.vx = (p.vx / (speed || 1)) * minSpeed;
+                p.vy = (p.vy / (speed || 1)) * minSpeed;
+            }
+
+            // Update DOM
+            p.el.style.left = p.x + 'px';
+            p.el.style.top = p.y + 'px';
+        });
+
+        floatingAnimationId = requestAnimationFrame(animate);
+    }
+
+    animate();
+}
+
+// ===== PHOTO VIEWER =====
+function openPhotoViewer(src) {
+    const viewer = document.getElementById('photoViewer');
+    const img = document.getElementById('viewerImage');
+    const closeBtn = document.getElementById('viewerClose');
+
+    img.src = src;
+    viewer.classList.remove('hidden');
+
+    function close() {
+        viewer.classList.add('hidden');
+        closeBtn.removeEventListener('click', close);
+        viewer.removeEventListener('click', bgClose);
+    }
+
+    function bgClose(e) {
+        if (e.target === viewer) close();
+    }
+
+    closeBtn.addEventListener('click', close);
+    viewer.addEventListener('click', bgClose);
 }
 
 // ===== CELEBRATION =====
