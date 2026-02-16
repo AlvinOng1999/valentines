@@ -1,0 +1,419 @@
+/* ============================================
+   ANGPAU QR CODE PAGE - BIRTHDAY THEME
+   ============================================ */
+
+/* ---------- RESET & BASE ---------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff6b9d;
+    --yellow: #feca57;
+    --orange: #ff9f43;
+    --red: #ff6b6b;
+    --purple: #a29bfe;
+    --blue: #48dbfb;
+    --green: #55efc4;
+    --magenta: #fd79a8;
+    --gold: #f9ca24;
+    --white: #ffffff;
+    --dark: #2d1b69;
+    --darker: #1a0e3e;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a0533 0%, #2d1b69 30%, #1a1040 60%, #0d0620 100%);
+    color: var(--white);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.fun-font {
+    font-family: 'Pacifico', cursive;
+}
+
+/* ---------- FLOATING BALLOONS ---------- */
+.balloons-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-balloon {
+    position: absolute;
+    bottom: -120px;
+    animation: balloonFloat linear infinite;
+    opacity: 0.5;
+    font-size: 35px;
+}
+
+@keyframes balloonFloat {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    5% { opacity: 0.5; }
+    50% { transform: translateY(-55vh) translateX(25px) rotate(8deg); }
+    90% { opacity: 0.4; }
+    100% {
+        transform: translateY(-115vh) translateX(-15px) rotate(-5deg);
+        opacity: 0;
+    }
+}
+
+/* ---------- SPARKLE STARS ---------- */
+.sparkle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.sparkle-star {
+    position: absolute;
+    animation: sparkle 3s ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
+/* ---------- ANGPAU PAGE CONTAINER ---------- */
+.angpau-page {
+    position: relative;
+    z-index: 10;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+}
+
+/* ---------- HEADER ---------- */
+.angpau-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.back-btn {
+    display: inline-block;
+    color: var(--yellow);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: 2px solid rgba(254, 202, 87, 0.3);
+    border-radius: 30px;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+}
+
+.back-btn:hover {
+    background: rgba(254, 202, 87, 0.15);
+    border-color: var(--yellow);
+    transform: translateX(-5px);
+}
+
+.header-emojis {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.header-emoji {
+    font-size: 2.5rem;
+    display: inline-block;
+}
+
+.he-1 { animation: emojiBounce 1.5s ease-in-out infinite 0s; }
+.he-2 { animation: emojiBounce 1.5s ease-in-out infinite 0.15s; }
+.he-3 { animation: emojiBounce 1.5s ease-in-out infinite 0.3s; }
+.he-4 { animation: emojiBounce 1.5s ease-in-out infinite 0.45s; }
+.he-5 { animation: emojiBounce 1.5s ease-in-out infinite 0.6s; }
+
+@keyframes emojiBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.1); }
+}
+
+.angpau-title {
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--gold), var(--orange), var(--red), var(--gold));
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease infinite, fadeInDown 1s ease;
+    margin-bottom: 10px;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.angpau-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 15px;
+    animation: fadeInUp 1s ease 0.3s both;
+}
+
+.angpau-instructions {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+    animation: fadeInUp 1s ease 0.5s both;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(254, 202, 87, 0.15);
+    border-radius: 15px;
+    padding: 15px 25px;
+}
+
+.angpau-instructions strong {
+    color: var(--yellow);
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- QR CODES GRID ---------- */
+.qr-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+.qr-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(254, 202, 87, 0.2);
+    border-radius: 20px;
+    padding: 25px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: cardPopIn 0.6s ease both;
+    animation-delay: var(--delay);
+}
+
+@keyframes cardPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.7) translateY(30px);
+    }
+    70% {
+        transform: scale(1.03) translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.qr-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transition: left 0.5s;
+}
+
+.qr-card:hover::before {
+    left: 100%;
+}
+
+.qr-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(254, 202, 87, 0.5);
+    box-shadow: 0 15px 40px rgba(249, 202, 36, 0.15),
+                0 0 60px rgba(249, 202, 36, 0.08);
+}
+
+.qr-number {
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--darker);
+    box-shadow: 0 3px 10px rgba(249, 202, 36, 0.3);
+}
+
+.qr-image-wrapper {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 12px;
+    display: inline-block;
+    margin: 10px 0 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.qr-image {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
+
+.qr-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--yellow);
+    letter-spacing: 0.3px;
+}
+
+/* ---------- FOOTER ---------- */
+.angpau-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(254, 202, 87, 0.15);
+}
+
+.footer-msg {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 15px;
+}
+
+.footer-emojis {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.footer-emojis span {
+    animation: emojiBounce 2s ease-in-out infinite;
+}
+
+.footer-emojis span:nth-child(1) { animation-delay: 0s; }
+.footer-emojis span:nth-child(2) { animation-delay: 0.1s; }
+.footer-emojis span:nth-child(3) { animation-delay: 0.2s; }
+.footer-emojis span:nth-child(4) { animation-delay: 0.3s; }
+.footer-emojis span:nth-child(5) { animation-delay: 0.4s; }
+.footer-emojis span:nth-child(6) { animation-delay: 0.5s; }
+
+.back-home-btn {
+    display: inline-block;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 14px 35px;
+    background: linear-gradient(135deg, var(--red), var(--orange), var(--gold));
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+    border-radius: 50px;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(255, 107, 107, 0.3);
+}
+
+.back-home-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(255, 107, 107, 0.5);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+    .angpau-title {
+        font-size: 2.3rem;
+    }
+
+    .qr-grid {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+    }
+
+    .qr-image {
+        width: 200px;
+        height: 200px;
+    }
+
+    .header-emoji {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .angpau-title {
+        font-size: 1.8rem;
+    }
+
+    .qr-image {
+        width: 160px;
+        height: 160px;
+    }
+
+    .qr-card {
+        padding: 20px 15px;
+    }
+
+    .angpau-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* ---------- SCROLLBAR ---------- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--darker);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--orange);
+}

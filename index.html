@@ -3,139 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💕 Will You Be My Valentine? 💕</title>
+    <title>🎂 Happy Birthday! 🎂</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Floating Hearts Background -->
-    <div class="hearts-bg" id="heartsBg"></div>
+    <!-- Floating Balloons Background -->
+    <div class="balloons-bg" id="balloonsBg"></div>
 
-    <!-- Rose Petals -->
-    <div class="petals-container" id="petalsContainer"></div>
+    <!-- Confetti particles -->
+    <div class="confetti-container" id="confettiContainer"></div>
 
-    <!-- ===== SECTION 1: INTRO / LANDING ===== -->
-    <section class="section intro-section" id="introSection">
-        <div class="envelope-wrapper" id="envelopeWrapper">
-            <div class="envelope" id="envelope">
-                <div class="envelope-flap"></div>
-                <div class="envelope-body">
-                    <div class="letter">
-                        <p class="letter-text">Toong Sher Minn,<br>I have something special to ask you... 💕</p>
-                    </div>
-                </div>
-            </div>
-            <p class="tap-hint">💌 Click the envelope 💌</p>
-        </div>
-    </section>
+    <!-- Sparkle Stars -->
+    <div class="sparkle-container" id="sparkleContainer"></div>
 
-    <!-- ===== SECTION 2: FLOATING PHOTO GALLERY ===== -->
-    <section class="section gallery-section hidden" id="gallerySection">
-        <h2 class="section-title script-font">Our Beautiful Moments</h2>
-        <p class="section-subtitle">Every moment with you is a treasure 💖</p>
+    <!-- ===== MAIN BIRTHDAY SECTION ===== -->
+    <section class="section birthday-section" id="birthdaySection">
+        <div class="birthday-content">
+            <!-- Cake icon top -->
+            <div class="cake-icon">🎂</div>
 
-        <!-- Floating photo bubbles -->
-        <div class="floating-photos-container" id="floatingPhotos">
-            <div class="photo-bubble" data-index="0">
-                <div class="bubble-glow"></div>
-                <img src="images/photo1.jpeg" alt="Our moment 1">
-                <div class="bubble-heart">💕</div>
+            <!-- Animated title -->
+            <h1 class="birthday-title fun-font">
+                <span class="letter-pop" style="--i:0">H</span><span class="letter-pop" style="--i:1">a</span><span class="letter-pop" style="--i:2">p</span><span class="letter-pop" style="--i:3">p</span><span class="letter-pop" style="--i:4">y</span>
+                <span class="letter-space"></span>
+                <span class="letter-pop" style="--i:5">B</span><span class="letter-pop" style="--i:6">i</span><span class="letter-pop" style="--i:7">r</span><span class="letter-pop" style="--i:8">t</span><span class="letter-pop" style="--i:9">h</span><span class="letter-pop" style="--i:10">d</span><span class="letter-pop" style="--i:11">a</span><span class="letter-pop" style="--i:12">y</span><span class="letter-pop" style="--i:13">!</span>
+            </h1>
+
+            <!-- Birthday person's photo -->
+            <div class="birthday-photo-frame">
+                <div class="photo-ring"></div>
+                <div class="photo-ring ring-2"></div>
+                <div class="photo-ring ring-3"></div>
+                <img src="images/birthday_girl.jpeg" alt="Birthday Girl" class="birthday-photo" id="birthdayPhoto">
+                <div class="photo-sparkles">✨</div>
             </div>
-            <div class="photo-bubble" data-index="1">
-                <div class="bubble-glow"></div>
-                <img src="images/photo2.jpeg" alt="Our moment 2">
-                <div class="bubble-heart">💖</div>
+
+            <!-- Name -->
+            <h2 class="birthday-name fun-font">Toong Sher Minn</h2>
+
+            <!-- Birthday message -->
+            <div class="birthday-message-box">
+                <p class="birthday-message">
+                    🎉 Wishing you the most amazing birthday ever! 🎉<br><br>
+                    May this year bring you endless happiness,<br>
+                    wonderful surprises, and all the joy you deserve! 🌟<br><br>
+                    You are truly special and the world is brighter<br>
+                    because you're in it! 💛✨
+                </p>
             </div>
-            <div class="photo-bubble" data-index="2">
-                <div class="bubble-glow"></div>
-                <img src="images/photo3.jpeg" alt="Our moment 3">
-                <div class="bubble-heart">💗</div>
+
+            <!-- Party emojis row -->
+            <div class="party-emojis">
+                <span class="party-emoji bounce-1">🎈</span>
+                <span class="party-emoji bounce-2">🎁</span>
+                <span class="party-emoji bounce-3">🎊</span>
+                <span class="party-emoji bounce-4">🎂</span>
+                <span class="party-emoji bounce-5">🎉</span>
+                <span class="party-emoji bounce-6">🎈</span>
             </div>
-            <div class="photo-bubble" data-index="3">
-                <div class="bubble-glow"></div>
-                <img src="images/photo4.jpeg" alt="Our moment 4">
-                <div class="bubble-heart">💓</div>
-            </div>
-            <div class="photo-bubble" data-index="4">
-                <div class="bubble-glow"></div>
-                <img src="images/photo5.jpeg" alt="Our moment 5">
-                <div class="bubble-heart">💘</div>
-            </div>
-            <div class="photo-bubble" data-index="5">
-                <div class="bubble-glow"></div>
-                <img src="images/photo6.jpeg" alt="Our moment 6">
-                <div class="bubble-heart">🌹</div>
-            </div>
-            <div class="photo-bubble" data-index="6">
-                <div class="bubble-glow"></div>
-                <img src="images/photo7.jpeg" alt="Our moment 7">
-                <div class="bubble-heart">💝</div>
-            </div>
-            <div class="photo-bubble" data-index="7">
-                <div class="bubble-glow"></div>
-                <img src="images/photo8.jpeg" alt="Our moment 8">
-                <div class="bubble-heart">❤️</div>
-            </div>
-            <div class="photo-bubble" data-index="8">
-                <div class="bubble-glow"></div>
-                <img src="images/photo9.jpeg" alt="Our moment 9">
-                <div class="bubble-heart">💕</div>
-            </div>
-            <div class="photo-bubble" data-index="9">
-                <div class="bubble-glow"></div>
-                <img src="images/photo10.jpeg" alt="Our moment 10">
-                <div class="bubble-heart">💖</div>
-            </div>
+
+            <!-- Angpau Button -->
+            <a href="angpau.html" class="angpau-btn pulse-btn" id="angpauBtn">
+                <span class="angpau-icon">🧧</span>
+                <span class="angpau-text">Please Claim Your Angpau!</span>
+                <span class="angpau-icon">🧧</span>
+            </a>
+
+            <p class="angpau-hint">👆 Tap to claim your birthday gift! 👆</p>
         </div>
 
-        <!-- Enlarged photo viewer overlay -->
-        <div class="photo-viewer hidden" id="photoViewer">
-            <img id="viewerImage" src="" alt="Our moment">
-            <button class="viewer-close" id="viewerClose">✕</button>
+        <!-- Big side balloons decoration -->
+        <div class="balloon-cluster left-balloons">
+            <div class="static-balloon" style="--color: #ff6b6b; --delay: 0s;">🎈</div>
+            <div class="static-balloon" style="--color: #feca57; --delay: 0.2s;">🎈</div>
+            <div class="static-balloon" style="--color: #48dbfb; --delay: 0.4s;">🎈</div>
+            <div class="static-balloon" style="--color: #ff9ff3; --delay: 0.6s;">🎈</div>
+            <div class="static-balloon" style="--color: #55efc4; --delay: 0.8s;">🎈</div>
+        </div>
+        <div class="balloon-cluster right-balloons">
+            <div class="static-balloon" style="--color: #a29bfe; --delay: 0.1s;">🎈</div>
+            <div class="static-balloon" style="--color: #fd79a8; --delay: 0.3s;">🎈</div>
+            <div class="static-balloon" style="--color: #fdcb6e; --delay: 0.5s;">🎈</div>
+            <div class="static-balloon" style="--color: #00cec9; --delay: 0.7s;">🎈</div>
+            <div class="static-balloon" style="--color: #e17055; --delay: 0.9s;">🎈</div>
         </div>
 
-        <button class="continue-btn pulse-btn" id="continueToQuestion">
-            Continue to the big question 💝
-        </button>
-    </section>
-
-    <!-- ===== SECTION 3: THE BIG QUESTION ===== -->
-    <section class="section question-section hidden" id="questionSection">
-        <div class="question-container">
-            <div class="heart-icon-big">❤️</div>
-            <h1 class="question-title script-font">Will You Be My Valentine at Feb 14?</h1>
-            <p class="question-subtitle">You make my heart skip a beat every single day 💓</p>
-
-            <div class="buttons-container" id="buttonsContainer">
-                <button class="btn btn-yes" id="yesBtn">
-                    Yes! 💖
-                </button>
-                <button class="btn btn-no" id="noBtn">
-                    No 💔
-                </button>
-            </div>
-
-            <p class="dodge-message hidden" id="dodgeMessage">Hehe, you can't say no! 😏💕</p>
-        </div>
-    </section>
-
-    <!-- ===== SECTION 4: CELEBRATION (after Yes) ===== -->
-    <section class="section celebration-section hidden" id="celebrationSection">
-        <div class="celebration-content">
-            <div class="fireworks" id="fireworks"></div>
-            <h1 class="celebration-title script-font">Yay! 🎉💕</h1>
-            <h2 class="celebration-subtitle">I knew you'd say yes, Toong Sher Minn!</h2>
-            <div class="celebration-heart">💖</div>
-            <p class="celebration-message">
-                You just made me the happiest person in the world!<br>
-                Happy Valentine's Day 2026, my love! 🌹✨
-            </p>
-            <div class="celebration-photos" id="celebrationPhotos">
-                <!-- A montage of photos will appear here -->
-            </div>
-        </div>
         <canvas id="confettiCanvas"></canvas>
     </section>
 
